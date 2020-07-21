@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>329081</title>
+  </head>
+  <body>
+    <script>
+      const getCount = async () => {
+        const response = await window.fetch(
+          "https://petition.parliament.uk/petitions/329081/count.json"
+        );
+        const json = await response.json();
+
+        document.getElementById("counter").innerHTML = json.signature_count;
+        document.getElementById("last_refreshed").innerHTML = Date();
+
+        console.log(json.signature_count);
+      };
+
+      setInterval(async () => {
+        await getCount();
+      }, 10000);
+
+      getCount();
+    </script>
+
+    <h1 id="counter"></h1>
+    <div id="last_refreshed"></div>
+  </body>
+</html>
